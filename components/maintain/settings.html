@@ -1,0 +1,38 @@
+<nav class="navbar navbar-default navbar-fixed-title hidden-print">
+    <div class="container navbar-title app-container">
+        <div class="row">
+            <div class="col-xs-2 col-md-4 page-title-left">
+                <a ng-click="settingsCtrl.Back()" class="btn btn-left"><i class="fa fa-chevron-left fa-large" aria-hidden="true"></i></a>
+            </div>
+            <div class="col-md-4 hidden-xs"><div class="page-title">Settings</div></div>
+            <div class="cols-xs-10 col-md-4 page-title-right">
+
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row">&nbsp;</div>
+    <div class="well">
+        <form name="inputform">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label class="control-label">Model:</label>
+                        <select class="form-control" ng-model="settingsCtrl.settings.model" ng-options="model.path as model.name for model in settingsCtrl.trained_model_list | orderBy:'name'">
+                            <option value="">- Select -</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">&nbsp;</div>
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <a class="btn btn-primary" ng-click="settingsCtrl.Save()">Save</a>&nbsp;&nbsp;
+                    <a class="btn btn-default" ng-click="settingsCtrl.Back()">Cancel</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

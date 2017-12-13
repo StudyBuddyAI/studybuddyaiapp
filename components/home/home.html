@@ -1,0 +1,53 @@
+<nav class="navbar navbar-default navbar-fixed-title hidden-print">
+    <div class="container navbar-title app-container">
+        <div class="row">
+            <div class="col-xs-2 col-md-4 page-title-left">
+
+            </div>
+            <div class="col-md-4 hidden-xs"><div class="page-title">Let's Study <i class="fa fa-thumbs-up" aria-hidden="true"></i></div></div>
+            <div class="cols-xs-10 col-md-4 page-title-right">
+                <div class="btn-group">
+                    <a class="btn" ng-click="homeCtrl.addTopic=true"><i class="fa fa-plus-circle fa-large" aria-hidden="true"></i>&nbsp;Add topic</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="row">&nbsp;</div>
+    <div class="row" ng-if="!homeCtrl.addTopic">
+        <div class="col-xs-12 text-center">
+            <p>Select a topic from the list below or do you want to ask me <a ui-sref="askanything"><b>anything</b></a>?</p>
+        </div>
+    </div>
+    <div class="row">&nbsp;</div>
+    <div class="list-group table-of-contents" ng-if="!homeCtrl.addTopic">
+        <div>
+            <button ng-click="homeCtrl.EnterCustom()" class="btn btn-primary btn-lg btn-block">Enter your own passage</button>
+            <div class="row">&nbsp;</div>
+        </div>
+        <div ng-repeat="row in homeCtrl.all_titles">
+            <button ng-click="homeCtrl.GotoTitle(row)" class="btn btn-primary btn-lg btn-block">{{homeCtrl.GetTitle(row.title)}}</button>
+            <div class="row">&nbsp;</div>
+        </div>
+    </div>
+    <div class="well" ng-if="homeCtrl.addTopic">
+        <form name="inputform">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label class="control-label">Topic:</label>
+                        <input type="text" ng-model="homeCtrl.new_topic" class="form-control" placeholder="Topic Name" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row">&nbsp;</div>
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <a class="btn btn-primary" ng-click="homeCtrl.Save()" ng-disabled="inputform.$invalid">Save</a>&nbsp;&nbsp;
+                    <a class="btn btn-default" ng-click="homeCtrl.Cancel()">Cancel</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

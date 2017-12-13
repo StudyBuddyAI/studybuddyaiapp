@@ -1,0 +1,16 @@
+.context-group{
+    margin-bottom: 15px;
+}
+.context-container{
+    padding: 10px;
+    background-color: #ffffff;
+    margin-bottom: 15px;
+}
+
+.question-container{
+    padding: 10px;
+    background-color: #ffffff;
+}
+.highlighted-text{
+    background-color: rgba(10,230,100,0.7);
+}

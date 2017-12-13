@@ -1,0 +1,53 @@
+<nav class="navbar navbar-default navbar-fixed-title hidden-print">
+    <div class="container navbar-title app-container">
+        <div class="row">
+            <div class="col-xs-2 col-md-2 page-title-left">
+                <a ng-click="titleQACtrl.Back()" class="btn btn-left"><i class="fa fa-chevron-left fa-large" aria-hidden="true"></i></a>
+            </div>
+            <div class="col-md-8 hidden-xs"><div class="page-title">Ask me a question about <b>{{titleQACtrl.GetTitleText(titleQACtrl.title.title)}}</b></div></div>
+            <div class="cols-xs-10 col-md-2 page-title-right">
+                <div class="btn-group">
+                    <a class="btn" ng-click="titleQACtrl.EditContexts()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;Edit contexts</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row">&nbsp;</div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="input-group">
+                <input type="text" class="form-control input-lg btn-rounded" placeholder="Type a question..." ng-model="titleQACtrl.context_question">
+                <span class="input-group-btn">
+                    <button ng-click="titleQACtrl.SubmitQuestion()" class="btn btn-default btn-lg btn-rounded"><i class="fa fa-question-circle-o" aria-hidden="true"></i>&nbsp; Submit</button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="row">&nbsp;</div>
+
+    <div class="row" ng-if="titleQACtrl.results">
+        <div class="col-xs-12">
+            <div class="form-group">
+                <label class="control-label">Answer:</label>
+                <div class="context-container">
+                    <b>{{titleQACtrl.results.best_span_str}}</b>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">&nbsp;</div>
+    <div class="row" ng-if="titleQACtrl.results">
+        <div class="col-xs-12">
+            <div class="form-group">
+                <label class="control-label">Passage Context:</label>
+                <div class="context-container" ng-bind-html="titleQACtrl.display_context">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">&nbsp;</div>
+</div>

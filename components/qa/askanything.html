@@ -1,0 +1,55 @@
+<nav class="navbar navbar-default navbar-fixed-title hidden-print">
+    <div class="container navbar-title app-container">
+        <div class="row">
+            <div class="col-xs-2 col-md-4 page-title-left">
+                <a ng-click="askAnythingCtrl.Back()" class="btn btn-left"><i class="fa fa-chevron-left fa-large" aria-hidden="true"></i></a>
+            </div>
+            <div class="col-md-4 hidden-xs"><div class="page-title">Ask me anything <i class="fa fa-exclamation" aria-hidden="true"></i></div></div>
+            <div class="cols-xs-10 col-md-4 page-title-right">
+
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row">&nbsp;</div>
+    <div class="well">
+        <form name="inputform">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label class="control-label">Question:</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control input-lg btn-rounded" placeholder="Type a question..." ng-model="askAnythingCtrl.context_question">
+                            <span class="input-group-btn">
+                            <button ng-click="askAnythingCtrl.SubmitQuestion()" class="btn btn-default btn-lg btn-rounded"><i class="fa fa-question-circle-o" aria-hidden="true"></i>&nbsp; Submit</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">&nbsp;</div>
+            <div class="row" ng-if="askAnythingCtrl.results">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label class="control-label">Answer:</label>
+                        <div class="context-container">
+                            <b>{{askAnythingCtrl.results.best_span_str}}</b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">&nbsp;</div>
+            <div class="row" ng-if="askAnythingCtrl.results">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label class="control-label">Passage Context:</label>
+                        <div class="context-container" ng-bind-html="askAnythingCtrl.display_context">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

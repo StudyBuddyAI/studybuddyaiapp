@@ -1,0 +1,77 @@
+<nav class="navbar navbar-default navbar-fixed-title hidden-print">
+    <div class="container navbar-title app-container">
+        <div class="row">
+            <div class="col-xs-2 col-md-4 page-title-left">
+                <a ng-click="editTitleContextCtrl.Back()" class="btn btn-left"><i class="fa fa-chevron-left fa-large" aria-hidden="true"></i></a>
+            </div>
+            <div class="col-md-4 hidden-xs"><div class="page-title">Contexts for <b>{{editTitleContextCtrl.GetTitleText(editTitleContextCtrl.title.title)}}</b></div></div>
+            <div class="cols-xs-10 col-md-4 page-title-right" style="padding-right: 0px;">
+                <div class="btn-group">
+                    <a class="btn" ng-click="editTitleContextCtrl.Save()"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;Save</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row">&nbsp;</div>
+    <div class="row context-group" ng-repeat="row in editTitleContextCtrl.paragraphs">
+        <div class="col-xs-5">
+            <div><small><b>Passage</b></small></div>
+            <div class="context-container" ng-bind-html="editTitleContextCtrl.display_context[row._id.$oid]">
+            </div>
+        </div>
+        <div class="col-xs-7 question-container">
+            <div ng-repeat="qa in row.qas" >
+                <div style="padding-top: 10px"><b>{{qa.question}}</b></div>
+                <div class="row">
+                    <div class="col-xs-12">Answers:</div>
+                </div>
+                <div ng-repeat="ans in qa.answers" style="padding-bottom: 10px;">
+                    <input type="text" class="form-control" ng-model="ans.text" ng-focus="editTitleContextCtrl.DisplayContext(row._id.$oid,row.context,ans.text)" ng-blur="editTitleContextCtrl.ResetContext(row._id.$oid,row.context)">
+                </div>
+                <div class="row">&nbsp;</div>
+                <div class="row">
+                    <div class="col-xs-8">
+                        <input type="text" ng-model="editTitleContextCtrl.new_answer[qa.$$hashKey]" class="form-control">
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="btn-group">
+                            <a class="btn" ng-click="editTitleContextCtrl.AddAnswer(row,qa)"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;Answer</a>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            </div>
+            <div class="row">&nbsp;</div>
+            <div class="row">
+                <div class="col-xs-8">
+                    <input type="text" ng-model="editTitleContextCtrl.new_question[row._id.$oid]" class="form-control">
+                </div>
+                <div class="col-xs-4">
+                    <div class="btn-group">
+                        <a class="btn" ng-click="editTitleContextCtrl.AddQuestion(row)"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;New Question</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        &nbsp;
+    </div>
+    <div class="row">
+        &nbsp;
+    </div>
+    <div class="row">
+        <div class="col-xs-12 text-left">
+            <textarea class="form-control" rows="5" ng-model="editTitleContextCtrl.new_context" placeholder="Add new passage here...."></textarea>
+        </div>
+    </div>
+    <div class="row">
+        &nbsp;
+    </div>
+    <div class="row">
+        <div class="col-xs-12 text-center"><a ng-click="editTitleContextCtrl.AddContext()" class="btn btn-default"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;Add passage</a></div>
+    </div>
+</div>

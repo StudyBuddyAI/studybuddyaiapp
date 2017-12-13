@@ -1,0 +1,70 @@
+<nav class="navbar navbar-default navbar-fixed-title hidden-print">
+    <div class="container navbar-title app-container">
+        <div class="row">
+            <div class="col-xs-2 col-md-4 page-title-left">
+                <a ng-click="enterYourOwnCtrl.Back()" class="btn btn-left"><i class="fa fa-chevron-left fa-large" aria-hidden="true"></i></a>
+            </div>
+            <div class="col-md-4 hidden-xs"><div class="page-title">Enter your own Passage</div></div>
+            <div class="cols-xs-10 col-md-4 page-title-right">
+
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row">&nbsp;</div>
+    <div class="well">
+        <form name="inputform">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label class="control-label">Passage:</label>
+                        <textarea class="form-control" rows="5" ng-model="enterYourOwnCtrl.context_text" placeholder="Add text here...."></textarea>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <a ng-repeat="eg in enterYourOwnCtrl.examples">
+                    <span style="margin-right: 10px;" class="badge" ng-click="enterYourOwnCtrl.LoadExample(eg)">{{eg.name}}</span>
+                </a>
+
+            </div>
+            <div class="row">&nbsp;</div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label class="control-label">Question:</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control input-lg btn-rounded" placeholder="Type a question..." ng-model="enterYourOwnCtrl.context_question">
+                            <span class="input-group-btn">
+                            <button ng-click="enterYourOwnCtrl.SubmitQuestion()" class="btn btn-default btn-lg btn-rounded"><i class="fa fa-question-circle-o" aria-hidden="true"></i>&nbsp; Submit</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">&nbsp;</div>
+            <div class="row" ng-if="enterYourOwnCtrl.results">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label class="control-label">Answer:</label>
+                        <div class="context-container">
+                            <b>{{enterYourOwnCtrl.results.best_span_str}}</b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">&nbsp;</div>
+            <div class="row" ng-if="enterYourOwnCtrl.results">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label class="control-label">Passage Context:</label>
+                        <div class="context-container" ng-bind-html="enterYourOwnCtrl.display_context">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
