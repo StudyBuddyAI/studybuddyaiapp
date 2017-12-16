@@ -36,16 +36,19 @@
             self.LoadAllTitleMatrix = function () {
                 return $http.get(AppConfig.Settings.mongodb_service_url + '/load_all_title_matrix?' + now().getTime(), { cache: false });
             }
+            self.GetContextMemory = function () {
+                return $http.get(AppConfig.Settings.mongodb_service_url + '/get_context_memory?' + now().getTime(), { cache: false });
+            }
 
             // Submit your own
             self.SubmitYourOwn = function (obj) {
                 return $http.post(AppConfig.Settings.mongodb_service_url + '/submit_your_own', obj);
             }
-            self.SubmitQuestionForTitle = function (id,obj) {
-                return $http.post(AppConfig.Settings.mongodb_service_url + '/submit_question_for_title?id=' + id, obj);
+            self.SubmitQuestionForTitle = function (id,obj,enable_context_memory) {
+                return $http.post(AppConfig.Settings.mongodb_service_url + '/submit_question_for_title?id=' + id + '&enable='+enable_context_memory, obj);
             }
-            self.SubmitQuestionForAllTitles = function (obj) {
-                return $http.post(AppConfig.Settings.mongodb_service_url + '/submit_question_for_all_titles', obj);
+            self.SubmitQuestionForAllTitles = function (obj,enable_context_memory) {
+                return $http.post(AppConfig.Settings.mongodb_service_url + '/submit_question_for_all_titles?enable='+enable_context_memory, obj);
             }
 
             // Title

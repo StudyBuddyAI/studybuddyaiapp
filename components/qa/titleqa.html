@@ -16,38 +16,100 @@
 
 <div class="container">
     <div class="row">&nbsp;</div>
+    <div class="row">&nbsp;</div>
     <div class="row">
         <div class="col-xs-12">
             <div class="input-group">
                 <input type="text" class="form-control input-lg btn-rounded" placeholder="Type a question..." ng-model="titleQACtrl.context_question">
                 <span class="input-group-btn">
                     <button ng-click="titleQACtrl.SubmitQuestion()" class="btn btn-default btn-lg btn-rounded"><i class="fa fa-question-circle-o" aria-hidden="true"></i>&nbsp; Submit</button>
+
+                    <a ng-if="titleQACtrl.results.best_span_str" class="btn btn-success btn-lg" ><i class="fa fa-check" aria-hidden="true"></i> Yes</a>&nbsp;&nbsp;
+                    <a ng-if="titleQACtrl.results.best_span_str" class="btn btn-danger btn-lg" ><i class="fa fa-times" aria-hidden="true"></i> No</a>
                 </span>
             </div>
         </div>
     </div>
     <div class="row">&nbsp;</div>
+    <div class="row" ng-if="titleQACtrl.status ==0">
+        <div class="col-xs-12">
+            <div class="alert alert-warning">
+                <strong>Sorry!</strong> I do not know the answer. Would you like to <a ng-click="titleQACtrl.EditContexts()"><b>teach</b></a> me?
+            </div>
+        </div>
+    </div>
 
-    <div class="row" ng-if="titleQACtrl.results">
-        <div class="col-xs-12">
-            <div class="form-group">
-                <label class="control-label">Answer:</label>
-                <div class="context-container">
-                    <b>{{titleQACtrl.results.best_span_str}}</b>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="row" ng-if="titleQACtrl.results">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label class="control-label">Answer:</label>
+                        <div class="context-container">
+                            <b>{{titleQACtrl.results.best_span_str}}</b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">&nbsp;</div>
+            <div class="row" ng-if="titleQACtrl.results">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label class="control-label">Passage Context:</label>
+                        <div class="context-container" ng-bind-html="titleQACtrl.display_context">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">&nbsp;</div>
+            <div class="row" ng-if="titleQACtrl.results">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label class="control-label">All passage contexts used to find the answer:</label>
+                        <div ng-repeat="row in titleQACtrl.current_context_list track by $index">
+                            <div class="context-container" ng-bind-html="row">
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">&nbsp;</div>
-    <div class="row" ng-if="titleQACtrl.results">
-        <div class="col-xs-12">
-            <div class="form-group">
-                <label class="control-label">Passage Context:</label>
-                <div class="context-container" ng-bind-html="titleQACtrl.display_context">
-                </div>
+        <div class="col-md-4">
+            <div class="row" ng-if="titleQACtrl.context_qa">
+                <uib-tabset>
+                    <uib-tab>
+                        <uib-tab-heading class="hidden-print">History</uib-tab-heading>
+                        <div ng-repeat="row in titleQACtrl.context_qa">
+                            <div class="context-container">
+                                <label class="control-label">Question:</label>
+                                <p>{{row.question}}</p>
+                                <label class="control-label">Answer:</label>
+                                <p>{{row.answer}}</p>
+                            </div>
+                        </div>
+                    </uib-tab>
+                    <uib-tab>
+                        <uib-tab-heading class="hidden-print">Context Memory</uib-tab-heading>
+                        <div style="padding: 10px; background-color: #ffffff;">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox" ng-model="titleQACtrl.enable_context_memory">
+                                    &nbsp;&nbsp;Enable
+                                </label>
+                            </div>
+                        </div>
+                        <div ng-repeat="row in titleQACtrl.context_memory track by $index">
+                            <div class="context-container" ng-bind-html="row">
+                            </div>
+                        </div>
+                    </uib-tab>
+                </uib-tabset>
             </div>
         </div>
     </div>
+
+
 
     <div class="row">&nbsp;</div>
 </div>

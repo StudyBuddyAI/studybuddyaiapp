@@ -39,6 +39,7 @@
             console.log(self.id);
             self.context_question = '';
             self.display_context = '';
+            self.enable_context_memory = false;
 
             if (self.id == '') {
                 $state.go('home');
@@ -74,22 +75,47 @@
                     toaster.pop('error', "Error", "There was an error processing your request");
                 });
 
+            // // Get context memory
+            // DataService.GetContextMemory()
+            //     .then(function(response){
+            //         self.context_memory = response.data.context_memory;
+            //         self.context_qa = response.data.context_qa;
+            //         console.log(self.context_memory)
+            //         console.log(self.context_qa)
+            //     })
+            //     .catch(function(response){
+            //         console.dir(response);
+            //         toaster.pop('error', "Error", "There was an error processing your request");
+            //     });
+
             self.SubmitQuestion = function () {
                 console.log(self.context_question)
 
                 var submit = {};
                 submit['question'] = self.context_question;
 
-                DataService.SubmitQuestionForTitle(self.id,submit)
+                DataService.SubmitQuestionForTitle(self.id,submit,self.enable_context_memory)
                     .then(function(response){
                         console.dir(response.data);
-                        self.results = response.data.prediction;
-                        self.context_text = response.data.passage;
 
-                        if(self.results.best_span_str == '') {
-                            self.display_context = self.context_text;
+                        self.status = response.data.status;
+
+                        if(self.status == 1){
+                            self.results = response.data.prediction;
+
+                            self.context_text = response.data.current_context;
+                            self.current_context_list = response.data.current_context_list;
+
+                            self.context_memory = response.data.context_memory;
+                            self.context_qa = response.data.context_qa;
+
+                            if(self.results.best_span_str == '') {
+                                self.display_context = self.context_text;
+                            }else{
+                                self.display_context = self.context_text.replace(self.results.best_span_str,'<span class="highlighted-text">' + self.results.best_span_str + '</span>');
+                            }
                         }else{
-                            self.display_context = self.context_text.replace(self.results.best_span_str,'<span class="highlighted-text">' + self.results.best_span_str + '</span>');
+                            self.results = null;
                         }
 
                     })
@@ -243,6 +269,7 @@
             self.context_text = '';
             self.context_question = '';
             self.display_context = '';
+            self.enable_context_memory = false;
 
             self.Back = function(){
                 $state.go('home');
@@ -264,16 +291,27 @@
                 var submit = {};
                 submit['question'] = self.context_question;
 
-                DataService.SubmitQuestionForAllTitles(submit)
+                DataService.SubmitQuestionForAllTitles(submit,self.enable_context_memory)
                     .then(function(response){
                         console.dir(response.data);
-                        self.results = response.data.prediction;
-                        self.context_text = response.data.passage;
+                        self.status = response.data.status;
 
-                        if(self.results.best_span_str == '') {
-                            self.display_context = self.context_text;
+                        if(self.status == 1){
+                            self.results = response.data.prediction;
+
+                            self.context_text = response.data.current_context;
+                            self.current_context_list = response.data.current_context_list;
+
+                            self.context_memory = response.data.context_memory;
+                            self.context_qa = response.data.context_qa;
+
+                            if(self.results.best_span_str == '') {
+                                self.display_context = self.context_text;
+                            }else{
+                                self.display_context = self.context_text.replace(self.results.best_span_str,'<span class="highlighted-text">' + self.results.best_span_str + '</span>');
+                            }
                         }else{
-                            self.display_context = self.context_text.replace(self.results.best_span_str,'<span class="highlighted-text">' + self.results.best_span_str + '</span>');
+                            self.results = null;
                         }
 
                     })
