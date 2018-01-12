@@ -1,5 +1,12 @@
 # Intelligent Question Answering System - StudyBuddyAI
 
+---
+
+- Madhav Thaker
+- Shivas Jayaram
+
+---
+
 ## Abstract
 There has been significant effort to understand and develop state of the art Question Answer systems. With the surge of deep learning, using sophisticated models such and LSTMs/GRU RNNs has become more accessible allowing researchers to test the boundaries for such systems. In this paper, we look to explore the fundamentals of such models and test the applications of Question Answering systems. In particular, we see this as a useful aid for students to extract meaningful answers from notes or text.
 
