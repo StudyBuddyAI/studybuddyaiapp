@@ -30,16 +30,6 @@ The different components in the architecture that helps in the learning loop are
 For the context finder we used the cosine similarity to match questions with passages in context. In future we would like to use jaccard similarity to match questions to passages and see how the performance compares with  cosine similarity.
 
 **Context Memory:** The context memory is used if the user does not want to repeat words again and again in questions. For example in table below we can see how the questions will need to be framed without and with the context memory. In the example the term “machine learning” will need to be repeated in every question if we do not have a context. We store the past “n” context in an array so that if the user chooses to ask questions from the context we have a history.
-Questions without a context
-Question with a context
-
-<table>
-<tr><td><b>Questions without a context</b></td><td><b>Question with a context</b></td></tr>
-<tr><td>What is machine learning?</td><td>What is machine learning?</td></tr>
-<tr><td>Who invented machine learning?</td><td>Who invented it?</td></tr>
-<tr><td>When was machine learning invented?</td><td>When was it invented?</td></tr>
-<tr><td>Where was machine learning invented?</td><td>Where was it invented?</td></tr>
-</table>
 
 | Questions without a context          | Question with a context           |
 | ------------------------------------ |:---------------------------------:|
